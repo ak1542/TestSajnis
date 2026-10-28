@@ -1,0 +1,16 @@
+{
+  "name": "course-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personal course notes site: draft privately, publish when ready.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "build": "node scripts/build.js",
+    "build:drafts": "node scripts/build.js --drafts",
+    "new": "node scripts/new-note.js"
+  },
+  "dependencies": {
+    "marked": "15.0.12"
+  }
+}
