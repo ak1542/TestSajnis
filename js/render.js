@@ -210,6 +210,10 @@
         if (Speech.supported) wrap.appendChild(speak);
         return wrap;
       }
+      case "heading": {
+        const h = el(b.level === 3 ? "h3" : "h2", { text: T(b.text) });
+        return el("div", { class: "block block-heading" }, [h]);
+      }
       case "image": {
         const u = safeUrl(b.url, true);
         const fig = el("figure", { class: "block image" });

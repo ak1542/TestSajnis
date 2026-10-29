@@ -97,6 +97,7 @@
     },
     blockText(b, lang) {
       switch (b.type) {
+        case "heading": return this.t(b.text, lang);
         case "text": return this.stripHtml(this.t(b.html, lang));
         case "table": return this.t(b.csv, lang).replace(/,/g, " — ").replace(/\n/g, ". ");
         case "measure": return this.t(b.lines, lang).split("\n").map((l) => l.split("|").map((x) => x.trim()).join(" ")).join(". ");

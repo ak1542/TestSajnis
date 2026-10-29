@@ -11,6 +11,7 @@
   <a class="skip" href="#view">Skip to content</a>
   <header class="top">
     <div class="top-in">
+      <button id="menuBtn" class="menu-btn" type="button" aria-controls="nav" aria-label="Menu">☰</button>
       <a class="brand" id="homeLink" href="#/"><span class="logo" aria-hidden="true">🧵</span><span id="brandName">Sajanies Learning</span></a>
       <form class="search" id="searchForm" role="search" autocomplete="off">
         <input id="q" type="search" placeholder="Search lessons…" aria-label="Search lessons">
@@ -22,7 +23,12 @@
     </div>
   </header>
 
-  <main id="view" tabindex="-1"></main>
+  <div class="shell no-toc" id="shell">
+    <aside id="nav" class="side-left" aria-label="Sections and lessons"></aside>
+    <main id="view" tabindex="-1"></main>
+    <aside id="toc" class="side-right"></aside>
+  </div>
+  <div id="backdrop" class="backdrop"></div>
 
   <footer>
     <a id="adminLink" href="admin.html">🔐 Teacher login</a>

@@ -31,7 +31,10 @@ window.SEED = {
       drag3d: "Drag to turn it around",
       noAudioVoice: "Your device has no voice for this language. Try another language.",
       backTo: "Back to",
-      popular: "Good places to begin"
+      popular: "Good places to begin",
+      sections: "Sections",
+      onThisPage: "On this page",
+      menu: "Menu"
     },
     hi: {
       siteName: "सजनीज़ लर्निंग",
@@ -57,7 +60,10 @@ window.SEED = {
       drag3d: "घुमाने के लिए खींचें",
       noAudioVoice: "आपके फ़ोन में इस भाषा की आवाज़ नहीं है। कोई दूसरी भाषा चुनें।",
       backTo: "वापस",
-      popular: "यहाँ से शुरू करें"
+      popular: "यहाँ से शुरू करें",
+      sections: "विषय",
+      onThisPage: "इस पृष्ठ पर",
+      menu: "मेनू"
     }
   },
   sections: [
@@ -103,10 +109,13 @@ window.SEED = {
       summary: { en: "The simplest stitch — in and out, in and out.", hi: "सबसे आसान टाँका — ऊपर-नीचे, ऊपर-नीचे।" },
       tags: ["stitch", "टाँका", "running", "beginner", "hand"],
       blocks: [
+        { type: "heading", level: 2, text: { en: "Watch the stitch", hi: "टाँका देखें" } },
         { type: "motion", preset: "running-stitch", caption: { en: "The needle goes up and down in a straight line.", hi: "सुई सीधी रेखा में ऊपर-नीचे जाती है।" } },
+        { type: "heading", level: 2, text: { en: "When to use it", hi: "कब इस्तेमाल करें" } },
         { type: "text", html: {
           en: "<p>Running stitch is used to join cloth for a short time, or to gather fabric. Keep every stitch the same length — about 3 mm.</p>",
           hi: "<p>कच्चे टाँके से कपड़े को कुछ समय के लिए जोड़ा जाता है या चुन्नट बनाई जाती है। हर टाँका बराबर रखें — लगभग 3 मिमी।</p>" } },
+        { type: "heading", level: 2, text: { en: "Listen to the steps", hi: "चरण सुनें" } },
         { type: "audio", url: "", narration: {
           en: "Bring the needle up from below. Take it down a little ahead. Bring it up again. Repeat, keeping the gaps even.",
           hi: "सुई को नीचे से ऊपर लाएँ। थोड़ा आगे जाकर नीचे डालें। फिर ऊपर लाएँ। यही दोहराएँ और दूरी बराबर रखें।" } }
@@ -125,10 +134,12 @@ window.SEED = {
       summary: { en: "Bust, waist, hip and length — the four key numbers.", hi: "छाती, कमर, कूल्हा और लंबाई — चार ज़रूरी नाप।" },
       tags: ["measurement", "नाप", "tape", "size", "bust", "waist"],
       blocks: [
+        { type: "heading", level: 2, text: { en: "How to hold the tape", hi: "टेप कैसे पकड़ें" } },
         { type: "motion", preset: "measuring-tape", caption: { en: "Keep the tape snug, not tight.", hi: "टेप को हल्का कसकर रखें, ज़्यादा तंग नहीं।" } },
         { type: "measure", lines: {
           en: "Bust | 36 | in\nWaist | 30 | in\nHip | 38 | in\nKurta length | 42 | in\nSleeve length | 22 | in",
           hi: "छाती | 36 | इंच\nकमर | 30 | इंच\nकूल्हा | 38 | इंच\nकुर्ता लंबाई | 42 | इंच\nआस्तीन लंबाई | 22 | इंच" } },
+        { type: "heading", level: 2, text: { en: "Good habits", hi: "अच्छी आदतें" } },
         { type: "text", html: {
           en: "<p>Stand straight and relaxed. Write each number down straight away. Measure twice, cut once.</p>",
           hi: "<p>सीधे और आराम से खड़े हों। हर नाप तुरंत लिख लें। दो बार नापें, एक बार काटें।</p>" } }
@@ -140,10 +151,13 @@ window.SEED = {
       summary: { en: "Draw, cut and check a simple kurta pattern.", hi: "सादा कुर्ता पैटर्न बनाएँ, काटें और जाँचें।" },
       tags: ["pattern", "पैटर्न", "kurta", "कुर्ता", "cutting", "paper"],
       blocks: [
+        { type: "heading", level: 2, text: { en: "What is a pattern?", hi: "पैटर्न क्या है?" } },
         { type: "text", html: {
           en: "<p>A <b>pattern</b> is a paper copy of each piece of the garment. You trace it on cloth, then cut.</p>",
           hi: "<p><b>पैटर्न</b> कपड़े के हर हिस्से की काग़ज़ वाली कॉपी होता है। इसे कपड़े पर उतारकर काटा जाता है।</p>" } },
+        { type: "heading", level: 2, text: { en: "Cutting the cloth", hi: "कपड़ा काटना" } },
         { type: "motion", preset: "cutting", caption: { en: "Cut slowly along the line. Keep the cloth flat.", hi: "रेखा पर धीरे-धीरे काटें। कपड़ा सपाट रखें।" } },
+        { type: "heading", level: 2, text: { en: "See it in 3D", hi: "3D में देखें" } },
         { type: "model3d", model: "kurta", color: "#b8553e", caption: { en: "3D preview: turn the kurta front and back.", hi: "3D झलक: कुर्ते का आगे और पीछे का हिस्सा घुमाकर देखें।" } },
         { type: "measure", lines: {
           en: "Front length | 42 | in\nShoulder | 14 | in\nChest width (half) | 20 | in\nSeam allowance | 1 | in",

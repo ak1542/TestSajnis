@@ -188,16 +188,94 @@
     view.replaceChildren(el("div", { class: "page" }, [el("p", { class: "empty", text: u.noResults }), el("a", { class: "btn", href: "#/", text: u.home })]));
   }
 
+  /* ---------- left panel: every section and its lessons ---------- */
+  const navEl = document.getElementById("nav");
+  const tocEl = document.getElementById("toc");
+  const shell = document.getElementById("shell");
+  const menuBtn = document.getElementById("menuBtn");
+  const openSecs = new Set();
+
+  const closeMenu = () => document.body.classList.remove("nav-open");
+  menuBtn.addEventListener("click", () => document.body.classList.toggle("nav-open"));
+  document.getElementById("backdrop").addEventListener("click", closeMenu);
+  navEl.addEventListener("click", (e) => { if (e.target.closest("a")) closeMenu(); });
+
+  function renderNav(secId, lessonId) {
+    const u = U();
+    const keep = navEl.scrollTop;
+    navEl.replaceChildren(el("h2", { class: "nav-title", text: u.sections }));
+    menuBtn.setAttribute("aria-label", u.menu); menuBtn.title = u.menu;
+    if (secId) openSecs.add(secId);
+    Store.sections().forEach((s) => {
+      const isOpen = openSecs.has(s.id);
+      const row = el("div", { class: "nav-row" + (s.id === secId && !lessonId ? " on" : "") }, [
+        el("a", { class: "nav-sec-link", href: "#/section/" + s.id, style: "--c:" + s.color }, [el("span", { text: s.icon }), el("span", { text: T(s.title) })]),
+        el("button", { class: "nav-toggle", type: "button", "aria-expanded": String(isOpen), "aria-label": T(s.title), text: isOpen ? "▾" : "▸",
+          onclick: () => { if (openSecs.has(s.id)) openSecs.delete(s.id); else openSecs.add(s.id); renderNav(secId, lessonId); } })
+      ]);
+      navEl.appendChild(row);
+      if (isOpen) {
+        const list = el("div", { class: "nav-lessons", style: "--c:" + s.color });
+        const ls = Store.lessonsIn(s.id, isAdmin());
+        if (!ls.length) list.appendChild(el("span", { class: "nav-empty", text: "—" }));
+        ls.forEach((l) => list.appendChild(el("a", { class: "nav-lesson" + (l.id === lessonId ? " on" : ""), href: "#/lesson/" + l.id, "aria-current": l.id === lessonId ? "page" : false, text: T(l.title) })));
+        navEl.appendChild(list);
+      }
+    });
+    navEl.scrollTop = keep;
+  }
+
+  /* ---------- right panel: headings found in the lesson, picked up automatically ---------- */
+  let spyOff = null;
+  function clearToc() {
+    if (spyOff) { spyOff(); spyOff = null; }
+    tocEl.replaceChildren();
+    shell.classList.add("no-toc");
+  }
+  function buildToc() {
+    clearToc();
+    const hs = Array.from(view.querySelectorAll(".rich h2, .rich h3, .block-heading h2, .block-heading h3, .measure h3"));
+    if (!hs.length) return;
+    shell.classList.remove("no-toc");
+    const u = U();
+    const box = el("nav", { class: "toc", "aria-label": u.onThisPage }, [el("h2", { class: "nav-title", text: u.onThisPage })]);
+    const items = [];
+    hs.forEach((h, i) => {
+      h.id = "h-" + (i + 1);
+      const a = el("a", { href: "#" + h.id, class: "toc-" + h.tagName.toLowerCase(), text: h.textContent.replace(/^📏\s*/, "").trim() });
+      a.addEventListener("click", (e) => { e.preventDefault(); h.scrollIntoView({ behavior: "smooth", block: "start" }); });
+      box.appendChild(a);
+      items.push({ h, a });
+    });
+    tocEl.appendChild(box);
+    const onScroll = () => {
+      let cur = items[0];
+      items.forEach((it) => { if (it.h.getBoundingClientRect().top <= 120) cur = it; });
+      items.forEach((it) => it.a.classList.toggle("on", it === cur));
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    spyOff = () => window.removeEventListener("scroll", onScroll);
+    onScroll();
+  }
+
   /* ---------- router ---------- */
   function route() {
     Speech.stop();
+    closeMenu();
     const h = (location.hash || "#/").replace(/^#/, "");
     const parts = h.split("/").filter(Boolean);
     const arg = parts[1] ? decodeURIComponent(parts.slice(1).join("/")) : "";
-    if (parts[0] === "section") sectionPage(arg);
-    else if (parts[0] === "lesson") lessonPage(arg);
+    let secId = null, lessonId = null;
+    if (parts[0] === "section") { sectionPage(arg); secId = arg; }
+    else if (parts[0] === "lesson") {
+      lessonPage(arg);
+      const l = Store.lesson(arg);
+      if (l) { lessonId = l.id; secId = l.sectionId; }
+    }
     else if (parts[0] === "search") { searchInput.value = arg; searchPage(arg); }
     else home();
+    renderNav(secId, lessonId);
+    if (lessonId) buildToc(); else clearToc();
     if (parts[0] !== "search" && document.activeElement !== searchInput) searchInput.value = "";
     window.scrollTo(0, 0);
   }

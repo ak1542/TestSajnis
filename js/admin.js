@@ -171,7 +171,7 @@
     (l.blocks || []).forEach((b, i) => m.appendChild(blockCard(l, b, i)));
 
     const bar = el("div", { class: "add-bar" });
-    [["text", "📝 Text"], ["motion", "🎞 Motion graphic"], ["image", "🖼 Image / GIF"], ["video", "🎬 Video"], ["table", "▦ Table"], ["measure", "📏 Measurements"], ["colors", "🎨 Colours"], ["model3d", "🧊 3D preview"], ["audio", "🔊 Audio"]]
+    [["heading", "🔖 Heading"], ["text", "📝 Text"], ["motion", "🎞 Motion graphic"], ["image", "🖼 Image / GIF"], ["video", "🎬 Video"], ["table", "▦ Table"], ["measure", "📏 Measurements"], ["colors", "🎨 Colours"], ["model3d", "🧊 3D preview"], ["audio", "🔊 Audio"]]
       .forEach(([t, label]) => bar.appendChild(el("button", { class: "btn small", type: "button", text: label, onclick: () => { l.blocks.push(newBlock(t)); save(); renderMain(); } })));
     m.appendChild(bar);
 
@@ -186,6 +186,7 @@
 
   function newBlock(t) {
     switch (t) {
+      case "heading": return { type: "heading", level: 2, text: {} };
       case "text": return { type: "text", html: {} };
       case "motion": return { type: "motion", preset: MOTION_PRESETS[0], caption: {} };
       case "image": return { type: "image", url: "", caption: {} };
@@ -199,7 +200,7 @@
     }
   }
 
-  const TYPE_NAMES = { text: "📝 Text", motion: "🎞 Motion graphic", image: "🖼 Image / GIF", video: "🎬 Video", table: "▦ Table", measure: "📏 Measurements", colors: "🎨 Colours", model3d: "🧊 3D preview", audio: "🔊 Audio" };
+  const TYPE_NAMES = { heading: "🔖 Heading", text: "📝 Text", motion: "🎞 Motion graphic", image: "🖼 Image / GIF", video: "🎬 Video", table: "▦ Table", measure: "📏 Measurements", colors: "🎨 Colours", model3d: "🧊 3D preview", audio: "🔊 Audio" };
 
   function blockCard(l, b, i) {
     const head = el("div", { class: "b-head" }, [
@@ -210,12 +211,20 @@
       el("button", { class: "mini", type: "button", title: "Delete block", text: "🗑", onclick: () => { if (confirm("Delete this block?")) { l.blocks.splice(i, 1); save(); renderMain(); } } })
     ]);
     const body = el("div", { class: "b-body" });
-    const editors = { text: textEditor, motion: motionEditor, image: imageEditor, video: videoEditor, table: tableEditor, measure: measureEditor, colors: colorsEditor, model3d: model3dEditor, audio: audioEditor };
+    const editors = { heading: headingEditor, text: textEditor, motion: motionEditor, image: imageEditor, video: videoEditor, table: tableEditor, measure: measureEditor, colors: colorsEditor, model3d: model3dEditor, audio: audioEditor };
     (editors[b.type] || (() => {}))(b, body);
     return el("div", { class: "b-card" }, [head, body]);
   }
 
   /* ---------- block editors ---------- */
+  function headingEditor(b, body) {
+    const lv = el("select", {});
+    [[2, "Big heading"], [3, "Smaller heading"]].forEach(([v, label]) => { const o = el("option", { value: String(v), text: label }); if ((b.level || 2) === v) o.selected = true; lv.appendChild(o); });
+    lv.addEventListener("change", () => { b.level = parseInt(lv.value, 10); save(); });
+    body.appendChild(tInput("Heading text", b, "text", { hint: "Headings appear in the “On this page” panel automatically." }));
+    body.appendChild(field("Size", lv));
+  }
+
   function textEditor(b, body) {
     if (!b.html || typeof b.html !== "object") b.html = {};
     const area = el("div", { class: "rt-area", contenteditable: "true", role: "textbox", "aria-multiline": "true", "aria-label": "Lesson text" });
@@ -228,7 +237,7 @@
     color.addEventListener("input", () => { area.focus(); cmd("foreColor", color.value); });
     const bar = el("div", { class: "rt-bar" }, [
       btn("B", "Bold", () => cmd("bold")), btn("I", "Italic", () => cmd("italic")), btn("U", "Underline", () => cmd("underline")),
-      btn("H", "Heading", () => cmd("formatBlock", "h3")), btn("¶", "Normal text", () => cmd("formatBlock", "p")),
+      btn("H2", "Big heading", () => cmd("formatBlock", "h2")), btn("H3", "Smaller heading", () => cmd("formatBlock", "h3")), btn("¶", "Normal text", () => cmd("formatBlock", "p")),
       btn("•", "Bullet list", () => cmd("insertUnorderedList")), btn("1.", "Numbered list", () => cmd("insertOrderedList")),
       color, btn("✕", "Clear formatting", () => cmd("removeFormat"))
     ]);
