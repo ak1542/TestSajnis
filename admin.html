@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Teacher panel · Sajanies Learning</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+  <div id="gate" class="gate" hidden>
+    <form id="gateForm" class="gate-box">
+      <div class="gate-logo">🔐</div>
+      <h1>Teacher panel</h1>
+      <p id="gateHint">Enter your passcode to edit lessons.</p>
+      <input id="pass" type="password" autocomplete="current-password" placeholder="Passcode" aria-label="Passcode">
+      <button class="btn" type="submit">Open</button>
+      <p id="gateErr" class="err" role="alert"></p>
+      <a href="index.html">← Back to the learning site</a>
+    </form>
+  </div>
+
+  <div id="app" hidden>
+    <header class="a-top">
+      <strong>🧵 Teacher panel</strong>
+      <label class="inline">Editing language
+        <select id="editLang"></select>
+      </label>
+      <button class="btn small ghost" id="addLang" type="button">＋ Language</button>
+      <span class="spacer"></span>
+      <span id="saved" class="saved" aria-live="polite"></span>
+      <a class="btn small ghost" href="index.html" target="_blank" rel="noopener">View site ↗</a>
+      <button class="btn small ghost" id="exportBtn" type="button">⬇ Backup</button>
+      <button class="btn small ghost" id="importBtn" type="button">⬆ Restore</button>
+      <button class="btn small ghost" id="moreBtn" type="button">⚙ More</button>
+      <button class="btn small" id="logoutBtn" type="button">Log out</button>
+      <input id="importFile" type="file" accept="application/json" hidden>
+    </header>
+    <div class="a-body">
+      <aside id="side" class="a-side" aria-label="Sections and lessons"></aside>
+      <section id="main" class="a-main" aria-live="polite"></section>
+    </div>
+  </div>
+
+  <script src="js/seed.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

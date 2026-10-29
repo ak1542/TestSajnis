@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sajanies Learning</title>
+  <meta name="description" content="Learn sewing, stitching and pattern making with pictures, motion and audio.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip" href="#view">Skip to content</a>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" id="homeLink" href="#/"><span class="logo" aria-hidden="true">🧵</span><span id="brandName">Sajanies Learning</span></a>
+      <form class="search" id="searchForm" role="search" autocomplete="off">
+        <input id="q" type="search" placeholder="Search lessons…" aria-label="Search lessons">
+      </form>
+      <div class="tools">
+        <button id="size" type="button" title="Text size" aria-label="Text size">A<small>A</small></button>
+        <select id="lang" aria-label="Language"></select>
+      </div>
+    </div>
+  </header>
+
+  <main id="view" tabindex="-1"></main>
+
+  <footer>
+    <a id="adminLink" href="admin.html">🔐 Teacher login</a>
+  </footer>
+
+  <script src="js/seed.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
