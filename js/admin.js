@@ -171,7 +171,7 @@
     (l.blocks || []).forEach((b, i) => m.appendChild(blockCard(l, b, i)));
 
     const bar = el("div", { class: "add-bar" });
-    [["heading", "🔖 Heading"], ["text", "📝 Text"], ["motion", "🎞 Motion graphic"], ["image", "🖼 Image / GIF"], ["video", "🎬 Video"], ["table", "▦ Table"], ["measure", "📏 Measurements"], ["colors", "🎨 Colours"], ["model3d", "🧊 3D preview"], ["audio", "🔊 Audio"]]
+    [["heading", "🔖 Heading"], ["text", "📝 Text"], ["motion", "🎞 Motion graphic"], ["image", "🖼 Image / GIF"], ["video", "🎬 Video"], ["table", "▦ Table"], ["measure", "📏 Measurements"], ["colors", "🎨 Colours"], ["model3d", "🧊 3D kurta"], ["garment3d", "👗 3D design"], ["audio", "🔊 Audio"]]
       .forEach(([t, label]) => bar.appendChild(el("button", { class: "btn small", type: "button", text: label, onclick: () => { l.blocks.push(newBlock(t)); save(); renderMain(); } })));
     m.appendChild(bar);
 
@@ -195,12 +195,13 @@
       case "measure": return { type: "measure", lines: { [editLang]: "Bust | 36 | in\nWaist | 30 | in" } };
       case "colors": return { type: "colors", colors: ["#b8553e", "#5f8f86", "#c28a2c"], caption: {} };
       case "model3d": return { type: "model3d", model: "kurta", color: "#b8553e", caption: {} };
+      case "garment3d": return { type: "garment3d", design: (window.Garment3D && Garment3D.ids[0]) || "d01", image: "", caption: {} };
       case "audio": return { type: "audio", url: "", narration: {} };
       default: return { type: "text", html: {} };
     }
   }
 
-  const TYPE_NAMES = { heading: "🔖 Heading", text: "📝 Text", motion: "🎞 Motion graphic", image: "🖼 Image / GIF", video: "🎬 Video", table: "▦ Table", measure: "📏 Measurements", colors: "🎨 Colours", model3d: "🧊 3D preview", audio: "🔊 Audio" };
+  const TYPE_NAMES = { heading: "🔖 Heading", text: "📝 Text", motion: "🎞 Motion graphic", image: "🖼 Image / GIF", video: "🎬 Video", table: "▦ Table", measure: "📏 Measurements", colors: "🎨 Colours", model3d: "🧊 3D kurta", garment3d: "👗 3D design", audio: "🔊 Audio" };
 
   function blockCard(l, b, i) {
     const head = el("div", { class: "b-head" }, [
@@ -211,7 +212,7 @@
       el("button", { class: "mini", type: "button", title: "Delete block", text: "🗑", onclick: () => { if (confirm("Delete this block?")) { l.blocks.splice(i, 1); save(); renderMain(); } } })
     ]);
     const body = el("div", { class: "b-body" });
-    const editors = { heading: headingEditor, text: textEditor, motion: motionEditor, image: imageEditor, video: videoEditor, table: tableEditor, measure: measureEditor, colors: colorsEditor, model3d: model3dEditor, audio: audioEditor };
+    const editors = { heading: headingEditor, text: textEditor, motion: motionEditor, image: imageEditor, video: videoEditor, table: tableEditor, measure: measureEditor, colors: colorsEditor, model3d: model3dEditor, garment3d: garment3dEditor, audio: audioEditor };
     (editors[b.type] || (() => {}))(b, body);
     return el("div", { class: "b-card" }, [head, body]);
   }
@@ -324,7 +325,21 @@
       wrap.appendChild(el("button", { class: "btn small ghost", type: "button", text: "＋ Colour", onclick: () => { b.colors.push("#888888"); save(); draw(); } }));
     };
     draw();
-    body.appendChild(field("Colours the learner can try on the kurta", wrap));
+    body.appendChild(field("Colours", wrap));
+    const pv = el("input", { type: "checkbox" }); pv.checked = b.preview !== false;
+    pv.addEventListener("change", () => { b.preview = pv.checked; save(); renderMain(); });
+    body.appendChild(el("label", { class: "row" }, [pv, el("span", { text: "Let learners try the colours on a kurta" })]));
+    if (b.preview === false) body.appendChild(tInput("Colour names, one per line", b, "names", { area: true, hint: "Same order as the colours above." }));
+    body.appendChild(tInput("Caption", b, "caption"));
+  }
+
+  function garment3dEditor(b, body) {
+    const sel = el("select", {});
+    const names = (window.Garment3D && Garment3D.names) || {};
+    ((window.Garment3D && Garment3D.ids) || []).forEach((id) => { const o = el("option", { value: id, text: names[id] || id }); if (id === b.design) o.selected = true; sel.appendChild(o); });
+    sel.addEventListener("change", () => { b.design = sel.value; save(); });
+    body.appendChild(field("Which 3D design", sel, "Learners can drag to turn it around. New 3D shapes need to be added in the code (js/garment3d.js)."));
+    body.appendChild(plain("Your drawing shown next to it (picture link, optional)", b.image, (v) => { b.image = v.trim(); }, "text"));
     body.appendChild(tInput("Caption", b, "caption"));
   }
 

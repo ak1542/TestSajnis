@@ -22,6 +22,8 @@
     return "";
   };
 
+  const okColor = (c) => /^#[0-9a-f]{3,8}$/i.test((c || "").trim());
+
   const ALLOWED = { P: 1, B: 1, I: 1, U: 1, STRONG: 1, EM: 1, UL: 1, OL: 1, LI: 1, H2: 1, H3: 1, BR: 1, SPAN: 1, A: 1, DIV: 1 };
   function sanitize(html) {
     const doc = new DOMParser().parseFromString("<body>" + (html || "") + "</body>", "text/html");
@@ -256,12 +258,47 @@
         });
         return box;
       }
+      case "garment3d": {
+        const fig = el("figure", { class: "block g3d" });
+        const stage = el("div", { class: "g3d-stage", title: ui.drag3d });
+        const auto = el("button", { class: "icon-btn", type: "button", title: ui.autoTurn, "aria-label": ui.autoTurn, text: "⟳" });
+        const left = el("button", { class: "icon-btn", type: "button", title: ui.turnLeft, "aria-label": ui.turnLeft, text: "◀" });
+        const right = el("button", { class: "icon-btn", type: "button", title: ui.turnRight, "aria-label": ui.turnRight, text: "▶" });
+        const pane = el("div", { class: "g3d-pane" }, [stage, el("div", { class: "g3d-ctrl" }, [left, auto, right]), el("small", { text: ui.threeDLabel })]);
+        const img = safeUrl(b.image, true);
+        const shot = el("div", { class: "g3d-shot" }, img ? [el("img", { src: img, alt: T(b.caption) || ui.yourDrawing, loading: "lazy" }), el("small", { text: ui.yourDrawing })] : []);
+        fig.appendChild(el("div", { class: "g3d-grid" }, img ? [pane, shot] : [pane]));
+        if (T(b.caption)) fig.appendChild(el("figcaption", {}, [el("span", { text: T(b.caption) })]));
+        let api = null, tried = false;
+        const start = () => {
+          if (tried) return; tried = true;
+          api = window.Garment3D ? window.Garment3D.mount(stage, b.design) : null;
+          if (!api) { stage.classList.add("no3d"); stage.textContent = ui.no3d; return; }
+          left.addEventListener("click", () => api.turn(-0.6));
+          right.addEventListener("click", () => api.turn(0.6));
+          auto.addEventListener("click", () => { api.toggleAuto(); });
+        };
+        if ("IntersectionObserver" in window) {
+          const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "200px" });
+          setTimeout(() => io.observe(stage), 0);
+        } else setTimeout(start, 0);
+        return fig;
+      }
       case "colors": {
+        if (b.preview === false) {
+          const names = T(b.names).split("\n");
+          const row = el("div", { class: "palette" });
+          (b.colors || []).forEach((c, i) => {
+            if (!okColor(c)) return;
+            row.appendChild(el("div", { class: "pal-item" }, [el("span", { class: "pal-chip", style: "background:" + c }), el("b", { text: (names[i] || "").trim() }), el("small", { text: c.toUpperCase() })]));
+          });
+          return el("div", { class: "block palette-block" }, [row]);
+        }
         const holder = el("div", { class: "color-demo" });
         const preview = el("div", { class: "color-preview" });
         const set = (c) => { preview.innerHTML = kurtaSVG(c, "front"); };
         const sw = el("div", { class: "swatches", role: "group", "aria-label": ui.colours });
-        (b.colors || []).forEach((c, i) => {
+        (b.colors || []).filter(okColor).forEach((c, i) => {
           const btn = el("button", { class: "swatch", type: "button", style: "background:" + c, "aria-label": c });
           btn.addEventListener("click", () => { set(c); sw.querySelectorAll(".swatch").forEach((x) => x.classList.remove("on")); btn.classList.add("on"); });
           if (i === 0) btn.classList.add("on");

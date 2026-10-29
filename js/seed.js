@@ -34,7 +34,13 @@ window.SEED = {
       popular: "Good places to begin",
       sections: "Sections",
       onThisPage: "On this page",
-      menu: "Menu"
+      menu: "Menu",
+      yourDrawing: "Your drawing",
+      threeDLabel: "3D version",
+      autoTurn: "Turn automatically",
+      turnLeft: "Turn left",
+      turnRight: "Turn right",
+      no3d: "3D is not available on this device. The drawing is shown instead."
     },
     hi: {
       siteName: "सजनीज़ लर्निंग",
@@ -63,118 +69,135 @@ window.SEED = {
       popular: "यहाँ से शुरू करें",
       sections: "विषय",
       onThisPage: "इस पृष्ठ पर",
-      menu: "मेनू"
+      menu: "मेनू",
+      yourDrawing: "आपका चित्र",
+      threeDLabel: "3D रूप",
+      autoTurn: "अपने-आप घुमाएँ",
+      turnLeft: "बाएँ घुमाएँ",
+      turnRight: "दाएँ घुमाएँ",
+      no3d: "इस डिवाइस पर 3D उपलब्ध नहीं है। इसकी जगह चित्र दिखाया गया है।"
     }
   },
-  sections: [
-    { id: "basics", icon: "🧵", color: "#b8553e", title: { en: "Sewing Basics", hi: "सिलाई की मूल बातें" }, blurb: { en: "Tools and first steps", hi: "औज़ार और पहले क़दम" } },
-    { id: "stitches", icon: "🪡", color: "#5f8f86", title: { en: "Stitches", hi: "टाँके" }, blurb: { en: "Hand stitches you can do today", hi: "हाथ के टाँके जो आज ही सीखें" } },
-    { id: "measurements", icon: "📏", color: "#c28a2c", title: { en: "Measurements", hi: "नाप लेना" }, blurb: { en: "Take the right size, every time", hi: "हर बार सही नाप" } },
-    { id: "patterns", icon: "✂️", color: "#8a5a8c", title: { en: "Pattern Making", hi: "पैटर्न बनाना" }, blurb: { en: "From paper pattern to cut cloth", hi: "काग़ज़ के पैटर्न से कटे कपड़े तक" } },
-    { id: "fabric", icon: "🎨", color: "#4f7fa8", title: { en: "Fabric & Colour", hi: "कपड़ा और रंग" }, blurb: { en: "Choose cloth and colours well", hi: "कपड़ा और रंग सोच-समझकर चुनें" } }
-  ],
-  lessons: [
-    {
-      id: "know-your-tools", sectionId: "basics", status: "published",
-      title: { en: "Know your sewing tools", hi: "सिलाई के औज़ार पहचानें" },
-      summary: { en: "The 6 things every tailor keeps on the table.", hi: "6 चीज़ें जो हर दर्ज़ी की मेज़ पर होती हैं।" },
-      tags: ["tools", "औज़ार", "scissors", "needle", "chalk", "basics"],
-      blocks: [
-        { type: "text", html: {
-          en: "<p>Before you start, keep these tools ready. Having them near you makes sewing calm and easy.</p>",
-          hi: "<p>शुरू करने से पहले ये औज़ार पास रखें। सब कुछ पास हो तो सिलाई आसान और शांत रहती है।</p>" } },
-        { type: "table", csv: {
-          en: "Tool,What it does\nTailor's scissors,Cuts cloth cleanly\nMeasuring tape,Takes body size\nTailor's chalk,Marks lines on cloth\nNeedles,Hand stitching\nThread,Joins the cloth\nPins,Hold cloth in place",
-          hi: "औज़ार,काम\nदर्ज़ी की कैंची,कपड़ा साफ़ काटती है\nइंच टेप,शरीर का नाप लेता है\nदर्ज़ी की चॉक,कपड़े पर निशान लगाती है\nसुइयाँ,हाथ की सिलाई\nधागा,कपड़े को जोड़ता है\nपिन,कपड़े को टिकाकर रखती हैं" } },
-        { type: "text", html: {
-          en: "<p><b>Tip:</b> Use tailor's scissors only on cloth. Cutting paper with them makes them blunt.</p>",
-          hi: "<p><b>सुझाव:</b> दर्ज़ी की कैंची से सिर्फ़ कपड़ा काटें। काग़ज़ काटने से वह कुंद हो जाती है।</p>" } }
-      ]
-    },
-    {
-      id: "threading-needle", sectionId: "basics", status: "published",
-      title: { en: "How to thread a needle", hi: "सुई में धागा कैसे डालें" },
-      summary: { en: "Watch it once, then try it yourself.", hi: "एक बार देखें, फिर ख़ुद करके देखें।" },
-      tags: ["needle", "thread", "सुई", "धागा", "beginner"],
-      blocks: [
-        { type: "motion", preset: "threading", caption: { en: "The thread goes through the small hole, called the eye.", hi: "धागा सुई के छोटे छेद से निकलता है, जिसे नाका कहते हैं।" } },
-        { type: "text", html: {
-          en: "<ol><li>Cut the thread at a slant with scissors.</li><li>Wet the tip a little.</li><li>Hold the needle up against a light.</li><li>Push the thread through the eye.</li><li>Pull about 15 cm through and knot the end.</li></ol>",
-          hi: "<ol><li>धागे को तिरछा काटें।</li><li>सिरे को थोड़ा गीला करें।</li><li>सुई को रोशनी की तरफ़ पकड़ें।</li><li>धागे को नाके में डालें।</li><li>लगभग 15 सेमी धागा खींचें और सिरे पर गाँठ लगाएँ।</li></ol>" } }
-      ]
-    },
-    {
-      id: "running-stitch", sectionId: "stitches", status: "published",
-      title: { en: "Running stitch", hi: "कच्चा टाँका (रनिंग स्टिच)" },
-      summary: { en: "The simplest stitch — in and out, in and out.", hi: "सबसे आसान टाँका — ऊपर-नीचे, ऊपर-नीचे।" },
-      tags: ["stitch", "टाँका", "running", "beginner", "hand"],
-      blocks: [
-        { type: "heading", level: 2, text: { en: "Watch the stitch", hi: "टाँका देखें" } },
-        { type: "motion", preset: "running-stitch", caption: { en: "The needle goes up and down in a straight line.", hi: "सुई सीधी रेखा में ऊपर-नीचे जाती है।" } },
-        { type: "heading", level: 2, text: { en: "When to use it", hi: "कब इस्तेमाल करें" } },
-        { type: "text", html: {
-          en: "<p>Running stitch is used to join cloth for a short time, or to gather fabric. Keep every stitch the same length — about 3 mm.</p>",
-          hi: "<p>कच्चे टाँके से कपड़े को कुछ समय के लिए जोड़ा जाता है या चुन्नट बनाई जाती है। हर टाँका बराबर रखें — लगभग 3 मिमी।</p>" } },
-        { type: "heading", level: 2, text: { en: "Listen to the steps", hi: "चरण सुनें" } },
-        { type: "audio", url: "", narration: {
-          en: "Bring the needle up from below. Take it down a little ahead. Bring it up again. Repeat, keeping the gaps even.",
-          hi: "सुई को नीचे से ऊपर लाएँ। थोड़ा आगे जाकर नीचे डालें। फिर ऊपर लाएँ। यही दोहराएँ और दूरी बराबर रखें।" } }
-      ]
-    },
-    {
-      id: "hemming", sectionId: "stitches", status: "draft",
-      title: { en: "Hemming (draft)", hi: "तुरपाई (ड्राफ़्ट)" },
-      summary: { en: "This lesson is still being written.", hi: "यह पाठ अभी लिखा जा रहा है।" },
-      tags: ["hem", "तुरपाई"],
-      blocks: [ { type: "text", html: { en: "<p>Coming soon.</p>", hi: "<p>जल्द आ रहा है।</p>" } } ]
-    },
-    {
-      id: "body-measurements", sectionId: "measurements", status: "published",
-      title: { en: "Taking body measurements", hi: "शरीर का नाप कैसे लें" },
-      summary: { en: "Bust, waist, hip and length — the four key numbers.", hi: "छाती, कमर, कूल्हा और लंबाई — चार ज़रूरी नाप।" },
-      tags: ["measurement", "नाप", "tape", "size", "bust", "waist"],
-      blocks: [
-        { type: "heading", level: 2, text: { en: "How to hold the tape", hi: "टेप कैसे पकड़ें" } },
-        { type: "motion", preset: "measuring-tape", caption: { en: "Keep the tape snug, not tight.", hi: "टेप को हल्का कसकर रखें, ज़्यादा तंग नहीं।" } },
-        { type: "measure", lines: {
-          en: "Bust | 36 | in\nWaist | 30 | in\nHip | 38 | in\nKurta length | 42 | in\nSleeve length | 22 | in",
-          hi: "छाती | 36 | इंच\nकमर | 30 | इंच\nकूल्हा | 38 | इंच\nकुर्ता लंबाई | 42 | इंच\nआस्तीन लंबाई | 22 | इंच" } },
-        { type: "heading", level: 2, text: { en: "Good habits", hi: "अच्छी आदतें" } },
-        { type: "text", html: {
-          en: "<p>Stand straight and relaxed. Write each number down straight away. Measure twice, cut once.</p>",
-          hi: "<p>सीधे और आराम से खड़े हों। हर नाप तुरंत लिख लें। दो बार नापें, एक बार काटें।</p>" } }
-      ]
-    },
-    {
-      id: "basic-kurta-pattern", sectionId: "patterns", status: "published",
-      title: { en: "Basic kurta pattern", hi: "बेसिक कुर्ता पैटर्न" },
-      summary: { en: "Draw, cut and check a simple kurta pattern.", hi: "सादा कुर्ता पैटर्न बनाएँ, काटें और जाँचें।" },
-      tags: ["pattern", "पैटर्न", "kurta", "कुर्ता", "cutting", "paper"],
-      blocks: [
-        { type: "heading", level: 2, text: { en: "What is a pattern?", hi: "पैटर्न क्या है?" } },
-        { type: "text", html: {
-          en: "<p>A <b>pattern</b> is a paper copy of each piece of the garment. You trace it on cloth, then cut.</p>",
-          hi: "<p><b>पैटर्न</b> कपड़े के हर हिस्से की काग़ज़ वाली कॉपी होता है। इसे कपड़े पर उतारकर काटा जाता है।</p>" } },
-        { type: "heading", level: 2, text: { en: "Cutting the cloth", hi: "कपड़ा काटना" } },
-        { type: "motion", preset: "cutting", caption: { en: "Cut slowly along the line. Keep the cloth flat.", hi: "रेखा पर धीरे-धीरे काटें। कपड़ा सपाट रखें।" } },
-        { type: "heading", level: 2, text: { en: "See it in 3D", hi: "3D में देखें" } },
-        { type: "model3d", model: "kurta", color: "#b8553e", caption: { en: "3D preview: turn the kurta front and back.", hi: "3D झलक: कुर्ते का आगे और पीछे का हिस्सा घुमाकर देखें।" } },
-        { type: "measure", lines: {
-          en: "Front length | 42 | in\nShoulder | 14 | in\nChest width (half) | 20 | in\nSeam allowance | 1 | in",
-          hi: "आगे की लंबाई | 42 | इंच\nकंधा | 14 | इंच\nछाती की चौड़ाई (आधी) | 20 | इंच\nसिलाई का मार्जिन | 1 | इंच" } }
-      ]
-    },
-    {
-      id: "choosing-colours", sectionId: "fabric", status: "published",
-      title: { en: "Choosing colours", hi: "रंग चुनना" },
-      summary: { en: "Try colours on a kurta before you buy cloth.", hi: "कपड़ा ख़रीदने से पहले कुर्ते पर रंग आज़माएँ।" },
-      tags: ["colour", "color", "रंग", "fabric", "कपड़ा"],
-      blocks: [
-        { type: "colors", colors: ["#b8553e", "#c28a2c", "#5f8f86", "#4f7fa8", "#8a5a8c", "#3a2f2a"], caption: { en: "Tap a colour to see the kurta change.", hi: "रंग दबाएँ और कुर्ते का रंग बदलता देखें।" } },
-        { type: "text", html: {
-          en: "<p>Warm colours (red, orange, yellow) feel bright and festive. Cool colours (blue, green) feel calm. Dark colours hide stains; light colours show them.</p>",
-          hi: "<p>गर्म रंग (लाल, नारंगी, पीला) चमकीले और त्योहार जैसे लगते हैं। ठंडे रंग (नीला, हरा) शांत लगते हैं। गहरे रंग दाग छुपाते हैं, हल्के रंग दिखाते हैं।</p>" } }
-      ]
-    }
-  ]
+  sections: [],
+  lessons: []
 };
+
+/* ---------- Section: My Designs (the teacher's nine drawings, each with a 3D version) ---------- */
+(function () {
+  const S = window.SEED;
+  const ul = (a) => "<ul>" + a.map((x) => "<li>" + x + "</li>").join("") + "</ul>";
+  const H = (en, hi) => ({ type: "heading", level: 2, text: { en: en, hi: hi } });
+
+  S.sections = [{
+    id: "my-designs", icon: "👗", color: "#a05a8c",
+    title: { en: "My Designs", hi: "मेरे डिज़ाइन" },
+    blurb: { en: "Nine original designs, each with a 3D version", hi: "नौ मौलिक डिज़ाइन, हर एक का 3D रूप" }
+  }];
+
+  const THEME = {
+    dots: { en: "Dots", hi: "बिंदियाँ" },
+    lines: { en: "Lines", hi: "धारियाँ" },
+    motifs: { en: "Motifs", hi: "मोटिफ़" }
+  };
+
+  const DESIGNS = [
+    { n: "01", theme: "dots",
+      title: { en: "Yellow polka high-low dress", hi: "पीली पोल्का हाई-लो ड्रेस" },
+      notes: { en: ["Sweetheart neckline with frilled flutter sleeves on the shoulders.", "A wrapped, ruched band at the waist makes the waist look slim.", "Flared skirt with a high-low hem: short at the front, longer at the back.", "Orange dots scattered on sunny yellow keep it playful."],
+               hi: ["दिल के आकार (स्वीटहार्ट) की नेकलाइन और कंधों पर फ्रिल वाली छोटी बाँहें।", "कमर पर लपेटी हुई चुन्नट वाली पट्टी कमर को पतला दिखाती है।", "घेरदार स्कर्ट, हाई-लो हेम — आगे से छोटी, पीछे से लंबी।", "पीले रंग पर बिखरी नारंगी बिंदियाँ इसे चुलबुला बनाती हैं।"] },
+      colors: ["#f2c230", "#ec7a2e"], names: { en: "Sunny yellow\nOrange", hi: "धूप जैसा पीला\nनारंगी" },
+      tips: { en: ["Choose light cotton, poplin or crepe so the flare falls softly.", "Cut the front of the skirt shorter and the back longer, then finish with a narrow rolled hem.", "Place the dots so they are not cut in half at the seams, especially at the neckline."],
+              hi: ["हल्का सूती, पॉपलिन या क्रेप कपड़ा चुनें ताकि घेर नरम गिरे।", "स्कर्ट का आगे का हिस्सा छोटा और पीछे का लंबा काटें, फिर बारीक मोड़कर हेम सिलें।", "बिंदियाँ ऐसे रखें कि सिलाई की रेखा पर आधी न कटें, ख़ासकर नेकलाइन पर।"] },
+      tags: ["dots", "polka", "dress", "high-low", "sweetheart", "ruffle", "yellow", "बिंदी", "पोल्का", "पीला", "ड्रेस"] },
+
+    { n: "02", theme: "dots",
+      title: { en: "Pink puff-sleeve mini dress", hi: "गुलाबी पफ-स्लीव मिनी ड्रेस" },
+      notes: { en: ["Sweetheart neckline with big puffed sleeves.", "Ruched wrap at the waist and a short, full skirt.", "Navy dots on soft pink: a sweet colour pair with strong contrast."],
+               hi: ["दिल के आकार की नेकलाइन और बड़ी फूली हुई (पफ) बाँहें।", "कमर पर चुन्नट वाला रैप और छोटी, घेरदार स्कर्ट।", "हल्के गुलाबी पर गहरी नीली बिंदियाँ: मीठी जोड़ी और साफ़ कंट्रास्ट।"] },
+      colors: ["#eab6d8", "#2b2d77"], names: { en: "Soft pink\nNavy", hi: "हल्का गुलाबी\nगहरा नीला" },
+      tips: { en: ["For puff sleeves, cut extra width at the top of the sleeve and gather it with two rows of long stitches.", "Line or interface the sweetheart neckline so it keeps its shape.", "Gather or pleat the short skirt for a fuller shape."],
+              hi: ["पफ बाँह के ऊपरी हिस्से में ज़्यादा चौड़ाई रखें और दो लाइन कच्चे टाँकों से चुन्नट डालें।", "स्वीटहार्ट नेकलाइन में अस्तर या इंटरफ़ेसिंग लगाएँ ताकि आकार बना रहे।", "छोटी स्कर्ट में चुन्नट या प्लीट डालें ताकि घेर भरा-भरा लगे।"] },
+      tags: ["dots", "puff sleeve", "mini", "dress", "pink", "बिंदी", "गुलाबी", "पफ", "मिनी"] },
+
+    { n: "03", theme: "dots",
+      title: { en: "Green ruched bodycon midi", hi: "हरी रूच्ड बॉडीकॉन मिडी" },
+      notes: { en: ["Scoop neckline with wide shoulder straps.", "Ruching along the side draws the eye along the body.", "Close-fitting from chest to below the knee.", "Small red dots on soft green."],
+               hi: ["गोल गले की नेकलाइन और चौड़े कंधे के स्ट्रैप।", "बगल में चुन्नट (रूचिंग) नज़र को शरीर की रेखा के साथ ले जाती है।", "छाती से घुटने के नीचे तक कसी हुई फ़िटिंग।", "हल्के हरे पर छोटी लाल बिंदियाँ।"] },
+      colors: ["#7fbf8a", "#d94545"], names: { en: "Soft green\nRed", hi: "हल्का हरा\nलाल" },
+      tips: { en: ["Use a stretch fabric such as jersey so the dress fits close and moves with you.", "Make the ruching with a gathered side seam or elastic thread.", "Fitted designs show every error, so take measurements carefully."],
+              hi: ["जर्सी जैसा स्ट्रेच कपड़ा लें ताकि ड्रेस कसी रहे और आराम से चले।", "रूचिंग के लिए बगल की सिलाई में चुन्नट डालें या इलास्टिक धागा इस्तेमाल करें।", "कसी हुई डिज़ाइन में हर ग़लती दिखती है, इसलिए नाप ध्यान से लें।"] },
+      tags: ["dots", "bodycon", "ruched", "midi", "dress", "green", "बिंदी", "हरा", "रूचिंग", "बॉडीकॉन"] },
+
+    { n: "04", theme: "lines",
+      title: { en: "Pink pleated midi with chevron bodice", hi: "गुलाबी प्लीटेड मिडी, शेवरॉन चोली" },
+      notes: { en: ["High neck and long puffed sleeves with fitted cuffs.", "Chevron (V-shaped) stripes on the bodice meet at the centre.", "Pleated midi skirt with straight stripes and a slightly slanted hem.", "Two pinks: a strong pink and a pale pink."],
+               hi: ["ऊँचा गला और लंबी फूली बाँहें, कलाई पर कसे कफ़।", "चोली पर शेवरॉन (V आकार) धारियाँ बीच में मिलती हैं।", "प्लीटेड मिडी स्कर्ट, सीधी धारियाँ और हल्का तिरछा हेम।", "दो गुलाबी रंग: गहरा और हल्का।"] },
+      colors: ["#d9488f", "#f8d9e6"], names: { en: "Strong pink\nPale pink", hi: "गहरा गुलाबी\nहल्का गुलाबी" },
+      tips: { en: ["Match the chevron stripes exactly at the centre-front seam.", "Press the pleats well before stitching them down at the waist.", "Light, sheer-looking sleeves work best in a soft fabric such as georgette or voile."],
+              hi: ["बीच की सिलाई पर शेवरॉन धारियाँ बिल्कुल मिलाकर रखें।", "कमर पर सिलने से पहले प्लीट्स को अच्छी तरह प्रेस करें।", "हल्की गुलाबी बाँहों के लिए जॉर्जेट या वॉयल जैसा हल्का कपड़ा अच्छा रहता है।"] },
+      tags: ["lines", "stripes", "chevron", "pleated", "pleats", "midi", "pink", "धारी", "प्लीट", "शेवरॉन", "गुलाबी"] },
+
+    { n: "05", theme: "lines",
+      title: { en: "Blue diagonal-stripe jumpsuit", hi: "नीला तिरछी धारियों वाला जंपसूट" },
+      notes: { en: ["V-neck with thin shoulder straps.", "A belt with a buckle defines the waist.", "Diagonal stripes make the body look long.", "Legs gather into cuffs at the ankle."],
+               hi: ["V गला और पतले कंधे के स्ट्रैप।", "बकल वाली बेल्ट कमर को उभारती है।", "तिरछी धारियाँ शरीर को लंबा दिखाती हैं।", "पैर टखने पर कफ़ में सिमट जाते हैं।"] },
+      colors: ["#3b8fc6", "#1f6fa8"], names: { en: "Sky blue\nDeep blue", hi: "आसमानी नीला\nगहरा नीला" },
+      tips: { en: ["Cut diagonal stripes carefully and mirror them on the two legs so they match.", "Stay-stitch the V-neckline so it does not stretch.", "Put elastic inside the ankle cuffs."],
+              hi: ["तिरछी धारियाँ ध्यान से काटें और दोनों पैरों में एक-जैसी (मिरर) रखें।", "V गले की किनारी पर पहले सीधा टाँका लगाएँ ताकि वह खिंचे नहीं।", "टखने के कफ़ में इलास्टिक डालें।"] },
+      tags: ["lines", "stripes", "diagonal", "jumpsuit", "belt", "blue", "धारी", "जंपसूट", "नीला", "तिरछी"] },
+
+    { n: "06", theme: "lines",
+      title: { en: "Striped wrap dress with ruffle hem", hi: "धारीदार रैप ड्रेस, रफल हेम" },
+      notes: { en: ["Wrap front with a deep V neck and a tie at the waist.", "Flutter sleeves.", "Vertical stripes in purple and black make it look tall and slim.", "Ruffled hem, short in front and long at the back."],
+               hi: ["आगे से रैप, गहरा V गला और कमर पर बाँधने की डोरी।", "फड़फड़ाती (फ्लटर) छोटी बाँहें।", "बैंगनी और काली सीधी धारियाँ ऊँचाई और पतलापन दिखाती हैं।", "रफल वाला हेम — आगे छोटा, पीछे लंबा।"] },
+      colors: ["#9b7bc9", "#1b1722"], names: { en: "Purple\nBlack", hi: "बैंगनी\nकाला" },
+      tips: { en: ["Give the wrap enough overlap so it stays closed when you move.", "Cut stripes along the straight grain so they hang straight.", "Cut the hem ruffle as a curved strip so it ripples naturally."],
+              hi: ["रैप में पर्याप्त ओवरलैप रखें ताकि चलने पर खुल न जाए।", "धारियाँ कपड़े के सीधे धागे की दिशा में काटें ताकि सीधी लटकें।", "हेम की रफल को गोलाई वाली पट्टी की तरह काटें ताकि लहरें अपने आप बनें।"] },
+      tags: ["lines", "stripes", "wrap", "ruffle", "dress", "purple", "धारी", "रैप", "रफल", "बैंगनी"] },
+
+    { n: "07", theme: "motifs",
+      title: { en: "Blue heart blouse with orange shorts", hi: "नीला हार्ट ब्लाउज और नारंगी शॉर्ट्स" },
+      notes: { en: ["Loose blouse with a small notch neckline.", "Balloon sleeves gathered into cuffs near the elbow.", "Dark heart motifs spread over blue.", "Orange shorts with a patch pocket and turned-up cuffs add a bright contrast."],
+               hi: ["ढीला ब्लाउज, छोटी कट वाली नेकलाइन।", "कोहनी के पास कफ़ में सिमटी गुब्बारे जैसी बाँहें।", "नीले रंग पर फैले गहरे हार्ट मोटिफ़।", "नारंगी शॉर्ट्स — पैच पॉकेट और मुड़े हुए कफ़ — चमकीला कंट्रास्ट देते हैं।"] },
+      colors: ["#2b86c5", "#ee8a45"], names: { en: "Blue\nOrange", hi: "नीला\nनारंगी" },
+      tips: { en: ["Print or block-print the hearts, and keep one heart centred at the front.", "Cotton twill works well for shorts and holds the cuff fold.", "Sew the patch pocket on before closing the side seams."],
+              hi: ["हार्ट प्रिंट या ब्लॉक-प्रिंट करें और एक हार्ट आगे के बीच में रखें।", "शॉर्ट्स के लिए कॉटन ट्विल अच्छा रहता है और कफ़ का मोड़ टिका रहता है।", "साइड सिलाई बंद करने से पहले पैच पॉकेट लगाएँ।"] },
+      tags: ["motif", "motifs", "heart", "blouse", "shorts", "blue", "orange", "मोटिफ़", "हार्ट", "ब्लाउज", "शॉर्ट्स"] },
+
+    { n: "08", theme: "motifs",
+      title: { en: "Plunge peplum with red mini", hi: "प्लंज पेप्लम टॉप और लाल मिनी" },
+      notes: { en: ["Deep V plunge neckline.", "Long bishop-style sleeves gathered at the wrist.", "A flared peplum frill at the waist.", "Small red triangle motifs on lime-yellow, balanced by a plain red mini skirt."],
+               hi: ["गहरा V (प्लंज) गला।", "कलाई पर सिमटी लंबी बिशप जैसी बाँहें।", "कमर पर घेरदार पेप्लम फ्रिल।", "हरे-पीले रंग पर छोटे लाल त्रिकोण मोटिफ़, साथ में सादी लाल मिनी स्कर्ट।"] },
+      colors: ["#c4d437", "#e0503a", "#e8444a"], names: { en: "Lime yellow\nRed motif\nRed skirt", hi: "हरा-पीला\nलाल मोटिफ़\nलाल स्कर्ट" },
+      tips: { en: ["Finish the plunge neckline with a facing or stay tape so it lies flat.", "Cut the peplum as a circle or half circle for an even flare.", "Keep motifs small near the V so it does not look crowded."],
+              hi: ["प्लंज गले पर फेसिंग या टेप लगाएँ ताकि वह सपाट बैठे।", "पेप्लम को पूरे या आधे गोले की तरह काटें ताकि घेर बराबर आए।", "V के पास मोटिफ़ छोटे रखें ताकि भीड़-भाड़ न लगे।"] },
+      tags: ["motif", "motifs", "peplum", "plunge", "top", "skirt", "red", "मोटिफ़", "पेप्लम", "लाल", "टॉप"] },
+
+    { n: "09", theme: "motifs",
+      title: { en: "Purple asymmetric ring-dot dress", hi: "बैंगनी असममित रिंग-डॉट ड्रेस" },
+      notes: { en: ["Round neck with puffed sleeves.", "Fitted bodice with vertical seams and a waist seam.", "Skirt with a slanted hem that is longer on one side.", "Dark ring-shaped dots on lavender."],
+               hi: ["गोल गला और फूली हुई बाँहें।", "चोली में खड़ी सिलाइयाँ और कमर पर जोड़।", "तिरछे हेम वाली स्कर्ट, एक तरफ़ से लंबी।", "हल्के बैंगनी पर गहरे रिंग जैसे बिंदु।"] },
+      colors: ["#a58fd8", "#1f2257"], names: { en: "Lavender\nNavy", hi: "हल्का बैंगनी\nगहरा नीला" },
+      tips: { en: ["Mark the slanted hem while the dress is on a dress form or being worn, then cut the longer side first.", "Draw ring motifs the same size so the pattern looks even.", "A soft, draping fabric makes the slanted hem fall nicely."],
+              hi: ["तिरछा हेम पहनकर या ड्रेस-फ़ॉर्म पर निशान लगाएँ, फिर पहले लंबा हिस्सा काटें।", "रिंग मोटिफ़ एक-जैसे आकार के रखें ताकि पैटर्न बराबर दिखे।", "नरम, गिरने वाला कपड़ा तिरछे हेम को सुंदर बनाता है।"] },
+      tags: ["motif", "motifs", "rings", "asymmetric", "dress", "purple", "मोटिफ़", "बैंगनी", "ड्रेस", "असममित"] }
+  ];
+
+  S.lessons = DESIGNS.map((d) => ({
+    id: "design-" + d.n, sectionId: "my-designs", status: "published",
+    title: { en: d.n + " · " + d.title.en, hi: d.n + " · " + d.title.hi },
+    summary: { en: THEME[d.theme].en + " — your design, its 3D version, colours and sewing tips", hi: THEME[d.theme].hi + " — आपका डिज़ाइन, उसका 3D रूप, रंग और सिलाई के सुझाव" },
+    tags: d.tags,
+    blocks: [
+      H("Your design in 3D", "आपका डिज़ाइन, 3D में"),
+      { type: "garment3d", design: "d" + d.n, image: "images/designs/d" + d.n + ".jpg",
+        caption: { en: "Drag to turn the 3D version. The front follows your drawing; the back and sides are our interpretation.", hi: "3D रूप को घुमाने के लिए खींचें। आगे का हिस्सा आपके चित्र जैसा है; पीछे और बगल का हिस्सा हमारी कल्पना है।" } },
+      H("What makes it special", "इसकी ख़ास बातें"),
+      { type: "text", html: { en: ul(d.notes.en), hi: ul(d.notes.hi) } },
+      H("Colours", "रंग"),
+      { type: "colors", preview: false, colors: d.colors, names: d.names, caption: {} },
+      H("Sewing tips", "सिलाई के सुझाव"),
+      { type: "text", html: { en: ul(d.tips.en), hi: ul(d.tips.hi) } }
+    ]
+  }));
+})();
