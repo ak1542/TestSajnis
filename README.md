@@ -13,11 +13,11 @@ A calm, easy-to-use website that helps people with little tech experience learn 
 - **Motion graphics** instead of long text (running stitch, cutting, measuring tape, threading a needle)
 - **Audio**: a 🔊 button reads any lesson aloud in the chosen language (device voice), or plays an uploaded audio link
 - **Search** across all languages — searching "pattern" (or "पैटर्न") shows every related lesson
-- **My Designs** section: nine original designs, each with a drag-to-turn **3D version** shown next to the original drawing, notes, colour palette and sewing tips (English + Hindi)
+- **My Designs** section: nine original designs, each showing the teacher's own drawing, key features, colour palette and sewing tips (English + Hindi)
 - Colour try-on, a 3D kurta preview, tables and measurement charts are available as lesson blocks
 
 **For the teacher** (`admin.html`)
-- Rich lesson editor made of blocks: heading, text (bold, H2/H3 headings, lists, colours), images/GIFs, video, tables, measurements, colour palettes, 3D designs, motion graphics, audio
+- Rich lesson editor made of blocks: heading, text (bold, H2/H3 headings, lists, colours), images/GIFs, video, tables, measurements, colour palettes, 3D kurta, motion graphics, audio
 - Create, rename, reorder and delete sections and lessons
 - **Draft / Published** control — drafts are hidden from learners
 - Write each lesson in every language using the "Editing language" switch (with a *Copy English* helper)
@@ -38,9 +38,9 @@ It also works on GitHub Pages (Settings → Pages → deploy from this branch, r
 
 Open `admin.html`. The starting passcode is `sajanies` — change it under **⚙ More**.
 
-## About the 3D designs
+## About the designs
 
-The 3D versions are built in code (three.js, included in `js/vendor/`, MIT licence) from each drawing's silhouette, colours and pattern. A single front drawing cannot show the back and sides, so those are an interpretation. The nine drawings are in `images/designs/`. Adding a *new* 3D shape means adding a model in `js/garment3d.js`; the teacher panel can choose between the existing nine.
+The nine drawings are in `images/designs/` and are shown exactly as drawn. A 3D version of each design was tried and removed for now; it is still in the git history (commit `61fa088`) if it is wanted again.
 
 ## Important to know
 
@@ -64,6 +64,5 @@ Add a small backend (for example Supabase or Firebase) for real teacher login, s
 | `js/render.js` | Lesson blocks, motion graphics, 3D preview, voice |
 | `js/store.js` | Data, languages, search, backup |
 | `js/seed.js` | Built-in section and lessons, interface text |
-| `js/garment3d.js`, `js/vendor/three.min.js` | 3D designs and the three.js library |
 | `images/designs/` | The nine drawings |
 | `css/style.css`, `css/admin.css` | Styles |

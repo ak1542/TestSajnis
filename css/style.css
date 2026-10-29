@@ -182,17 +182,11 @@ footer { text-align: center; color: var(--muted); padding: 2rem 1rem; font-size:
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 
-/* 3D design viewer */
-.g3d-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
-.g3d-pane, .g3d-shot { display: flex; flex-direction: column; gap: .5rem; align-items: center; text-align: center; }
-.g3d-pane small, .g3d-shot small { color: var(--muted); font-weight: 600; }
-.g3d-stage { width: 100%; aspect-ratio: 9 / 13; max-height: 640px; background: linear-gradient(#f3e8d8, #dfcdb6); border: 2px solid var(--line); border-radius: var(--radius); overflow: hidden; cursor: grab; position: relative; }
-.g3d-stage:active { cursor: grabbing; }
-.g3d-stage.no3d { display: grid; place-items: center; padding: 1rem; color: var(--muted); cursor: default; aspect-ratio: auto; min-height: 120px; }
-.g3d-ctrl { display: flex; gap: .6rem; }
-.g3d-shot img { width: 100%; max-height: 640px; object-fit: contain; border: 2px solid var(--line); border-radius: var(--radius); background: #fdfcfa; }
+/* design drawings */
+.block.image { text-align: center; }
+.block.image img { width: auto; max-width: 100%; max-height: 760px; margin: 0 auto; display: block; border: 2px solid var(--line); border-radius: var(--radius); background: #fdfcfa; }
+.block.image figcaption { justify-content: center; }
 .palette { display: flex; flex-wrap: wrap; gap: 1rem; }
 .pal-item { display: flex; align-items: center; gap: .6rem; background: var(--card); border: 2px solid var(--line); border-radius: 999px; padding: .35rem 1rem .35rem .4rem; }
 .pal-chip { width: 2.2rem; height: 2.2rem; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 0 2px var(--line); flex: none; }
 .pal-item small { color: var(--muted); }
-@media (max-width: 640px) { .g3d-grid { grid-template-columns: minmax(0, 1fr); } .g3d-shot { order: 2; } .g3d-shot img { max-height: 480px; } }

@@ -34,13 +34,7 @@ window.SEED = {
       popular: "Good places to begin",
       sections: "Sections",
       onThisPage: "On this page",
-      menu: "Menu",
-      yourDrawing: "Your drawing",
-      threeDLabel: "3D version",
-      autoTurn: "Turn automatically",
-      turnLeft: "Turn left",
-      turnRight: "Turn right",
-      no3d: "3D is not available on this device. The drawing is shown instead."
+      menu: "Menu"
     },
     hi: {
       siteName: "सजनीज़ लर्निंग",
@@ -69,20 +63,14 @@ window.SEED = {
       popular: "यहाँ से शुरू करें",
       sections: "विषय",
       onThisPage: "इस पृष्ठ पर",
-      menu: "मेनू",
-      yourDrawing: "आपका चित्र",
-      threeDLabel: "3D रूप",
-      autoTurn: "अपने-आप घुमाएँ",
-      turnLeft: "बाएँ घुमाएँ",
-      turnRight: "दाएँ घुमाएँ",
-      no3d: "इस डिवाइस पर 3D उपलब्ध नहीं है। इसकी जगह चित्र दिखाया गया है।"
+      menu: "मेनू"
     }
   },
   sections: [],
   lessons: []
 };
 
-/* ---------- Section: My Designs (the teacher's nine drawings, each with a 3D version) ---------- */
+/* ---------- Section: My Designs (the teacher's nine drawings) ---------- */
 (function () {
   const S = window.SEED;
   const ul = (a) => "<ul>" + a.map((x) => "<li>" + x + "</li>").join("") + "</ul>";
@@ -91,7 +79,7 @@ window.SEED = {
   S.sections = [{
     id: "my-designs", icon: "👗", color: "#a05a8c",
     title: { en: "My Designs", hi: "मेरे डिज़ाइन" },
-    blurb: { en: "Nine original designs, each with a 3D version", hi: "नौ मौलिक डिज़ाइन, हर एक का 3D रूप" }
+    blurb: { en: "Nine original designs, with colours and sewing tips", hi: "नौ मौलिक डिज़ाइन, रंग और सिलाई के सुझावों के साथ" }
   }];
 
   const THEME = {
@@ -186,12 +174,11 @@ window.SEED = {
   S.lessons = DESIGNS.map((d) => ({
     id: "design-" + d.n, sectionId: "my-designs", status: "published",
     title: { en: d.n + " · " + d.title.en, hi: d.n + " · " + d.title.hi },
-    summary: { en: THEME[d.theme].en + " — your design, its 3D version, colours and sewing tips", hi: THEME[d.theme].hi + " — आपका डिज़ाइन, उसका 3D रूप, रंग और सिलाई के सुझाव" },
+    summary: { en: THEME[d.theme].en + " — your design, colours and sewing tips", hi: THEME[d.theme].hi + " — आपका डिज़ाइन, रंग और सिलाई के सुझाव" },
     tags: d.tags,
     blocks: [
-      H("Your design in 3D", "आपका डिज़ाइन, 3D में"),
-      { type: "garment3d", design: "d" + d.n, image: "images/designs/d" + d.n + ".jpg",
-        caption: { en: "Drag to turn the 3D version. The front follows your drawing; the back and sides are our interpretation.", hi: "3D रूप को घुमाने के लिए खींचें। आगे का हिस्सा आपके चित्र जैसा है; पीछे और बगल का हिस्सा हमारी कल्पना है।" } },
+      H("Your design", "आपका डिज़ाइन"),
+      { type: "image", url: "images/designs/d" + d.n + ".jpg", caption: { en: "Your original drawing.", hi: "आपका मूल चित्र।" } },
       H("What makes it special", "इसकी ख़ास बातें"),
       { type: "text", html: { en: ul(d.notes.en), hi: ul(d.notes.hi) } },
       H("Colours", "रंग"),

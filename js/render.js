@@ -258,32 +258,6 @@
         });
         return box;
       }
-      case "garment3d": {
-        const fig = el("figure", { class: "block g3d" });
-        const stage = el("div", { class: "g3d-stage", title: ui.drag3d });
-        const auto = el("button", { class: "icon-btn", type: "button", title: ui.autoTurn, "aria-label": ui.autoTurn, text: "⟳" });
-        const left = el("button", { class: "icon-btn", type: "button", title: ui.turnLeft, "aria-label": ui.turnLeft, text: "◀" });
-        const right = el("button", { class: "icon-btn", type: "button", title: ui.turnRight, "aria-label": ui.turnRight, text: "▶" });
-        const pane = el("div", { class: "g3d-pane" }, [stage, el("div", { class: "g3d-ctrl" }, [left, auto, right]), el("small", { text: ui.threeDLabel })]);
-        const img = safeUrl(b.image, true);
-        const shot = el("div", { class: "g3d-shot" }, img ? [el("img", { src: img, alt: T(b.caption) || ui.yourDrawing, loading: "lazy" }), el("small", { text: ui.yourDrawing })] : []);
-        fig.appendChild(el("div", { class: "g3d-grid" }, img ? [pane, shot] : [pane]));
-        if (T(b.caption)) fig.appendChild(el("figcaption", {}, [el("span", { text: T(b.caption) })]));
-        let api = null, tried = false;
-        const start = () => {
-          if (tried) return; tried = true;
-          api = window.Garment3D ? window.Garment3D.mount(stage, b.design) : null;
-          if (!api) { stage.classList.add("no3d"); stage.textContent = ui.no3d; return; }
-          left.addEventListener("click", () => api.turn(-0.6));
-          right.addEventListener("click", () => api.turn(0.6));
-          auto.addEventListener("click", () => { api.toggleAuto(); });
-        };
-        if ("IntersectionObserver" in window) {
-          const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "200px" });
-          setTimeout(() => io.observe(stage), 0);
-        } else setTimeout(start, 0);
-        return fig;
-      }
       case "colors": {
         if (b.preview === false) {
           const names = T(b.names).split("\n");
